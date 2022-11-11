@@ -1,5 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
+import { RouterProvider } from 'react-router-dom';
+import { router } from './Router/Router';
 
 
 
@@ -8,8 +10,8 @@ import './App.css';
 
 function App() {
   return (
-    <div className="App">
-     
+    <div className='font-serif' >
+      <RouterProvider router={router}></RouterProvider>
     </div>
   );
 }
