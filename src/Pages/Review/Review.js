@@ -4,18 +4,18 @@ import ReviewRow from './ReviewRow';
 
 const Review = () => {
     const {user} = useContext(AuthContext)
-    const [orders, setOrder] = useState([])
+    const [review, setReview] = useState([])
 
 
     useEffect(() => {
         fetch(`https://personal-server-site.vercel.app/reviews?email=${user?.email}`)
         .then(res => res.json())
-        .then(data => setOrder(data))
+        .then(data => setReview(data))
     }, [user?.email])
 
 
     const handleDelete = id => {
-        const proceed = window.confirm('Are you sure you want to delete this?')
+        const proceed = window.confirm('Are you sure you want to cancel this order')
         if(proceed){
             fetch(`https://personal-server-site.vercel.app/reviews/${id}`, {
                 method: 'DELETE'
@@ -24,19 +24,20 @@ const Review = () => {
             .then(data => {
                 console.log(data)
                 if(data.deletedCount > 0){
-                    alert('Deleted Successfully')
-                    const remaining = orders.filter(odr => odr._id !== id)
-                    setOrder(remaining)
+                    alert('deleted successfully');
+                    const remaining = review.filter(rv => rv._id !== id)
+                    setReview(remaining)
 
                 }
             })
             
         }
     }
+
     return (
         <div className='bg-slate-800  lg:p-40 p-10 py-40 h-full'> 
         <div className='text-white font-bold lg:text-5xl sm:text-4xl text-center'>
-            {orders.length > 0 ? 'My reviews' : "No reviews available" }
+            {review.length > 0 ? 'My reviews' : "No reviews available" }
         </div>
         
            
@@ -45,9 +46,9 @@ const Review = () => {
 
             <tbody className='text-start' >
                 {
-                    orders.map(order => <ReviewRow
-                        key={order._id}
-                        order={order}
+                    review.map(rv => <ReviewRow
+                        key={rv._id}
+                        review={rv}
                         handleDelete = {handleDelete}
                         // handleStatusUpdate= {handleStatusUpdate}
                     ></ReviewRow>)

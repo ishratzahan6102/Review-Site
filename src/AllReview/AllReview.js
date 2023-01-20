@@ -13,14 +13,14 @@ const AllReview = () => {
 
 
     useEffect(() => {
-        fetch(`https://personal-server-site.vercel.app/reviews`)
+        fetch(`https://personal-server-site.vercel.app/reviews2?book=${_id}`)
         .then(res => res.json())
         .then(data =>{ 
             console.log(data)
             
             setReviews(data)}
             )
-    }, [user?.email])
+    }, [_id])
 
 
     return (

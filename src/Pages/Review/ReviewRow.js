@@ -3,9 +3,9 @@ import { FaUser } from 'react-icons/fa';
 import { AuthContext } from '../../Context/UserContext';
 import { Link } from 'react-router-dom';
 
-const ReviewRow = ({order, handleDelete}) => {
+const ReviewRow = ({ review, handleDelete}) => {
     const { user, logOut} = useContext(AuthContext)
-    const {books_name, customer, message, phone, price, email, book, _id, status} = order
+    const {books_name, customer, message, phone, price, email, book, _id, status} = review
     const [orderBook, setOrderBook] = useState({})
 
     useEffect( () => {
